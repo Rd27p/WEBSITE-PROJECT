@@ -1,4 +1,5 @@
 // Show main content and hide landing page
+
 document.getElementById('enter-site').addEventListener('click', function() {
     document.getElementById('landing-page').style.display = 'none';
     document.getElementById('main-content').style.display = 'block';
