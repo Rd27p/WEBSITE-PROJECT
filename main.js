@@ -1,28 +1,74 @@
-// Show main content and hide landing page
+document.addEventListener('DOMContentLoaded', () => {
+    const navbar = document.querySelector('nav');
+    const navLinks = document.querySelectorAll('.nav-links a');
+    const hamburger = document.querySelector('.hamburger');
+    const navMenu = document.querySelector('.nav-links');
+    const darkModeToggle = document.getElementById('dark-mode-toggle');
+    const yButton = document.querySelector('.y-button');
+    const iButton = document.querySelector('.i-button');
 
-document.getElementById('enter-site').addEventListener('click', function() {
-    document.getElementById('landing-page').style.display = 'none';
-    document.getElementById('main-content').style.display = 'block';
-});
+    // Smooth scroll
+    navLinks.forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href');
+            const targetElement = document.querySelector(targetId);
 
-setTimeout(function() {
-    document.getElementById('landing-page').style.display = 'none';
-    document.getElementById('main-content').style.display = 'block';
-}, 3000); 
+            if (targetElement) {
+                const navbarHeight = navbar.offsetHeight;
+                const elementPosition = targetElement.offsetTop;
+                const offsetMargin = 70;
+                const offsetPosition = elementPosition - navbarHeight - offsetMargin;
 
-function updateVersion(version) {
-    const versionElement = document.getElementById('version');
-    versionElement.textContent = `Version: ${version}`;
-}
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth'
+                });
+            }
 
-document.querySelector('.y-button').addEventListener('click', function() {
-    alert("Go to Raka Darma Youtube?");
-});
+            // Close menu on mobile
+            navMenu.classList.remove('active');
+        });
+    });
 
-document.querySelector('.i-button').addEventListener('click', function() {
-    alert("Go to Raka Darma Instagram?");
-});
-
-window.onload = function() {
+    // Update version
+    function updateVersion(version) {
+        const versionElement = document.getElementById('version');
+        if (versionElement) {
+            versionElement.textContent = `Version: ${version}`;
+        }
+    }
     updateVersion("0.0.5");
-};
+
+    // Social Media button alert
+    if (yButton) {
+        yButton.addEventListener('click', () => {
+            alert("You are going to Raka Darma's YouTube Channel!");
+        });
+    }
+
+    if (iButton) {
+        iButton.addEventListener('click', () => {
+            alert("You are going to Raka Darma's Instagram!");
+        });
+    }
+
+    // Toggle Hamburger Menu
+    if (hamburger && navMenu) {
+        hamburger.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+    }
+
+    // Dark Mode Toggle
+    if (darkModeToggle) {
+        darkModeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            darkModeToggle.textContent = 
+                document.body.classList.contains('dark-mode') 
+                ? 'Light Mode' 
+                : 'Dark Mode';
+        });
+    }
+});
+    

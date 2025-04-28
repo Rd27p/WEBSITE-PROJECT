@@ -4,21 +4,36 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <title>Raka Darma Personal Website</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Landing Page -->
-    <div id="landing-page">
-        <h1>Welcome to Raka Darma's Website</h1>
-        <button id="enter-site">Enter Site</button>
-    </div>
+    <!-- Header-->
+    <header class="navbar">
+        <div class="container">
+            <div class="logo">Raka Darma</div>
+            <div class="hamburger">
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+            </div>
+            <button id="dark-mode-toggle">Dark Mode</button> <!-- Ini tombol baru -->
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="#first">About</a></li>
+                    <li><a href="#second">Social Media</a></li>
+                    <li><a href="#third">History</a></li>
+                    <li><a href="#fourth">School</a></li>
+                    <li><a href="#fifth">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
 
     <!-- Main Content -->
     <div id="main-content">
-        <h1>Raka Darma Personal Website</h1>
-        <h2 id="version">Version: 0.0.5</h2>
-
         <div class="content" id="first">
             <h2>About Raka Darma</h2>
             <p> Update: </p>
@@ -50,6 +65,7 @@
                 <li>0.0.4 (March 2023)</li>
                 <li>0.0.5 (September 2024)</li>
                 <li>0.0.6 (October 2024)</li>
+                <li>0.0.7 (April 2025)</li>
             </ul>
         </div>
 
@@ -79,4 +95,3 @@
     <script src="main.js"></script>
 </body>
 </html>
-
