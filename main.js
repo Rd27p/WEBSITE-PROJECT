@@ -7,27 +7,39 @@ document.addEventListener('DOMContentLoaded', () => {
     const yButton = document.querySelector('.y-button');
     const iButton = document.querySelector('.i-button');
 
-    // Smooth scroll
+    // Check and apply the saved mode preference from localStorage
+    if (localStorage.getItem('darkMode') === 'true') {
+        document.body.classList.add('dark-mode');
+        darkModeToggle.textContent = 'Light Mode';
+    } else {
+        document.body.classList.remove('dark-mode');
+        darkModeToggle.textContent = 'Dark Mode';
+    }
+
+    // Smooth scroll for in-page navigation
     navLinks.forEach(anchor => {
         anchor.addEventListener('click', function (e) {
-            e.preventDefault();
             const targetId = this.getAttribute('href');
-            const targetElement = document.querySelector(targetId);
+            
+            // Check if it's an internal link (anchor link)
+            if (targetId.startsWith('#')) {
+                e.preventDefault();
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    const navbarHeight = navbar.offsetHeight;
+                    const elementPosition = targetElement.offsetTop;
+                    const offsetMargin = 70;
+                    const offsetPosition = elementPosition - navbarHeight - offsetMargin;
 
-            if (targetElement) {
-                const navbarHeight = navbar.offsetHeight;
-                const elementPosition = targetElement.offsetTop;
-                const offsetMargin = 70;
-                const offsetPosition = elementPosition - navbarHeight - offsetMargin;
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth'
+                    });
+                }
 
-                window.scrollTo({
-                    top: offsetPosition,
-                    behavior: 'smooth'
-                });
+                // Close menu on mobile
+                navMenu.classList.remove('active');
             }
-
-            // Close menu on mobile
-            navMenu.classList.remove('active');
         });
     });
 
@@ -64,11 +76,13 @@ document.addEventListener('DOMContentLoaded', () => {
     if (darkModeToggle) {
         darkModeToggle.addEventListener('click', () => {
             document.body.classList.toggle('dark-mode');
-            darkModeToggle.textContent = 
-                document.body.classList.contains('dark-mode') 
-                ? 'Light Mode' 
-                : 'Dark Mode';
+            const isDarkMode = document.body.classList.contains('dark-mode');
+
+            // Update localStorage with the current mode
+            localStorage.setItem('darkMode', isDarkMode);
+
+            // Change button text based on mode
+            darkModeToggle.textContent = isDarkMode ? 'Light Mode' : 'Dark Mode';
         });
     }
 });
-    
